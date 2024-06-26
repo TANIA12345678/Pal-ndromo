@@ -1,0 +1,47 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+// Función para determinar si una cadena es un palíndromo
+bool esPalindromo(const string &cadena) {
+    int izquierda = 0;
+    int derecha = cadena.length() - 1;
+
+    while (izquierda < derecha) {
+        // Saltar caracteres no alfanuméricos
+        while (izquierda < derecha && !isalnum(cadena[izquierda])) {
+            izquierda++;
+        }
+        while (izquierda < derecha && !isalnum(cadena[derecha])) {
+            derecha--;
+        }
+
+        // Comparar caracteres en mayúsculas o minúsculas
+        if (tolower(cadena[izquierda]) != tolower(cadena[derecha])) {
+            return false;
+        }
+
+        izquierda++;
+        derecha--;
+    }
+
+    return true;
+}
+
+// Función principal
+int main() {
+    string cadena;
+    cout << "Ingrese una cadena de caracteres: ";
+    getline(cin, cadena);  // Lee toda la línea de entrada
+
+    if (esPalindromo(cadena)) {
+        cout << "La cadena es un palíndromo." << endl;
+    } else {
+        cout << "La cadena no es un palíndromo." << endl;
+    }
+
+    return 0;
+}
+
